@@ -1,0 +1,55 @@
+<div class="mainContainer" id="staticSection">
+
+<!-- Album photos template -->
+	<div class="containerHeader">
+		Static Albums
+	</div>
+	<!-- Album photos template -->
+	<div id="staticSrollWrapper" >
+		<div  class="scroller">
+			<ul class="horizontal-slide">
+				<template ngFor #i=index #album [ngForOf]="albums">
+					<li  (click)="getStaticAlbumPhotos(i, album.albumTitle)">
+						<div class="item">
+							<img class="img-responsive" src="{{album.list[0].fileName}}" align="middle">
+							<div class="album-name">
+								<p>{{album.albumTitle}}</p>
+							</div>
+						</div>
+					</li>
+				</template>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div id="modal-staticcontent" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h3>{{selectedAlbumName}}</h3>
+            </div>
+            <div class="modal-body" >
+				<div id="staticPhotoSrollWrapper">
+					<div class="scroller">
+						<ul class="album-photos">
+							<template ngFor #photo [ngForOf]="selectedAlbumPhotos">
+								<li class="item" #item (click)="toggleSelection(item)">
+									  <img src="{{photo.fileName}}" align="middle">
+									  <div class="carousel-caption">
+										<!--<h3>{{album.name}}</h3>-->
+									  </div>
+								</li>
+							</template>
+						</ul>
+					</div>
+				</div>
+            </div>
+            <div class="modal-footer"> 
+                <a href="#" class="btn" data-dismiss="modal">Close</a>
+                 <a href="#" class="btn btn-primary" (click) = "createCollage()">Create collage</a>
+            </div>
+        </div>
+    </div>
+</div>
